@@ -69,27 +69,34 @@ const App = () => {
     fetchCart();
   }, []);
 
-  const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
+  console.log(products);
+
+ const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
 
   return (
-    <Router>
-      <div style={{ display: 'flex' }}>
-        <CssBaseline />
-        <Navbar totalItems={cart.total_items} handleDrawerToggle={handleDrawerToggle} />
-        <Switch>
-          <Route exact path="/">
-            <Products products={products} onAddToCart={handleAddToCart} handleUpdateCartQty />
+     <Router>
+       <div style={{ display: 'flex' }}>
+         <CssBaseline />
+         <Navbar totalItems={cart.total_items} handleDrawerToggle={handleDrawerToggle} />
+         <Switch>
+           <Route exact path="/">
+             <Products products={products}  />
           </Route>
-          <Route exact path="/cart">
-            <Cart cart={cart} onUpdateCartQty={handleUpdateCartQty} onRemoveFromCart={handleRemoveFromCart} onEmptyCart={handleEmptyCart} />
-          </Route>
-          <Route path="/checkout" exact>
-            <Checkout cart={cart} order={order} onCaptureCheckout={handleCaptureCheckout} error={errorMessage} />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
-  );
-};
-
-export default App;
+           <Route exact path="/cart">
+             <Cart cart={cart} onUpdateCartQty={handleUpdateCartQty} onRemoveFromCart={handleRemoveFromCart} onEmptyCart={handleEmptyCart} />
+           </Route>
+           <Route path="/checkout" exact>
+             <Checkout cart={cart} order={order} onCaptureCheckout={handleCaptureCheckout} error={errorMessage} />
+           </Route>
+         </Switch>
+       </div>
+     </Router>
+    );
+  };
+  
+  export default App;
+  {/* <div>
+    <Navbar />
+    <Products products={products} />
+  </div> */}
+  
