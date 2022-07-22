@@ -1,6 +1,8 @@
 import React from 'react';
 import { Card, CardMedia, CardContent, CardActions, Typography, IconButton } from '@material-ui/core';
 import { AddShoppingCart } from '@material-ui/icons';
+import { Link } from 'react-router-dom';
+import '../estilos.css';
 
 import useStyles from './styles';
 
@@ -11,9 +13,7 @@ const Product = ({ product, onAddToCart }) => {
 
   return (
     <Card className={classes.root}>
-      <CardMedia className={classes.image} image={product.image.url} title={product.name} />
-      <CardMedia className={classes.image} src={product.image.url} />
-      {/* <CardMedia className={classes.media} image={product.media.source} title={product.name} /> */}
+      <CardMedia className={classes.image} image={product.assets[0].url} alt="imagen" />
       <CardContent>
         <div className={classes.cardContent}>
           <Typography gutterBottom variant="h5" component="h2">
@@ -22,11 +22,15 @@ const Product = ({ product, onAddToCart }) => {
           <Typography gutterBottom variant="h5" component="h2">
             ${product.price.formatted}
           </Typography>
+          
         </div>
         <Typography dangerouslySetInnerHTML={{ __html: product.description }} variant="body2" color="textSecondary" component="p" />
       </CardContent>
       <CardActions disableSpacing className={classes.cardActions}>
-        <IconButton aria-label="Add to Cart" onClick={handleAddToCart}>
+        <Typography gutterBottom variant="h5" component="a">
+            <a href={product.checkout_url.display}  align-text='left' name='detalle'>Ver Producto</a>          
+        </Typography>
+        <IconButton aria-label="Agregar al Carrito" onClick={()=> onAddToCart(product.id, 1)}>
           <AddShoppingCart />
         </IconButton>
       </CardActions>
