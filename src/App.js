@@ -70,6 +70,7 @@ const App = () => {
   }, []);
 
   console.log(products);
+  console.log(cart);
 
  const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
 
@@ -80,9 +81,9 @@ const App = () => {
          <Navbar totalItems={cart.total_items} handleDrawerToggle={handleDrawerToggle} />
          <Switch>
            <Route exact path="/">
-             <Products products={products}  />
+             <Products products={products} onAddToCart={handleAddToCart} />
           </Route>
-           <Route exact path="/cart">
+           <Route exact path="/carts">
              <Cart cart={cart} onUpdateCartQty={handleUpdateCartQty} onRemoveFromCart={handleRemoveFromCart} onEmptyCart={handleEmptyCart} />
            </Route>
            <Route path="/checkout" exact>
@@ -95,8 +96,4 @@ const App = () => {
   };
   
   export default App;
-  {/* <div>
-    <Navbar />
-    <Products products={products} />
-  </div> */}
   
