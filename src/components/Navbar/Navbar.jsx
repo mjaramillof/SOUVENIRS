@@ -41,7 +41,7 @@ const PrimarySearchAppBar = ({ totalItems }) => {
           {location.pathname === '/' && (
           <div className={classes.button}>
             <IconButton component={Link} to="/carts" aria-label="Show cart items" color="inherit">
-              <Badge badgeContent={totalItems} color="secondary">
+              <Badge badgeContent={totalItems} color="secondary" overlap="rectangular">
                 <ShoppingCart />
               </Badge>
             </IconButton>
