@@ -1,15 +1,15 @@
-import React from "react";
-//import { Typography, Button, Card, CardActions, CardContent, CardMedia } from '@material-ui/core';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import useStyles from "./styles";
+const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
 
-const CartItem = ({ item, line_items, lineItemId, onUpdateCartQty, onRemoveFromCart }) => {
-  const classes = useStyles();
+  const handleUpdateCartQty = (lineItemId, quantity) => {
+    onUpdateCartQty(lineItemId, quantity);
+  }
 
-  const handleUpdateCartQty = (line_items, newQuantity) =>
-    onUpdateCartQty(line_items, newQuantity);
-
-  const handleRemoveFromCart = (line_item_id) => onRemoveFromCart(lineItemId);
+  const handleRemoveFromCart = () => {
+    onRemoveFromCart(item.id);
+  }
 
   return (
     <div className="cart-item">
@@ -17,17 +17,65 @@ const CartItem = ({ item, line_items, lineItemId, onUpdateCartQty, onRemoveFromC
       <div className="cart-item__details">
         <h4 className="cart-item__details-name">{item.name}</h4>
         <div className="cart-item__details-qty">
+          <p>{item.quantity}</p>
+        </div>
+        <div className="cart-item__details-price">{item.line_total.formatted_with_symbol}</div>
+      </div>
+      <button
+        type="button"
+        className="cart-item__remove"
+      >
+        Remove
+      </button>
+    </div>
+  );
+};
+
+CartItem.propTypes = {
+    item: PropTypes.object,
+};
+
+export default CartItem;
+
+
+
+
+/* import React from "react";
+//import { Typography, Button, Card, CardActions, CardContent, CardMedia } from '@material-ui/core';
+
+import useStyles from "./styles";
+import Commerce from '@chec/commerce.js';
+const commerce = new Commerce(process.env.REACT_APP_CHEC_PUBLIC_KEY);
+
+const CartItem = ({ item, line_items, lineItemId, onUpdateCartQty, onRemoveFromCart }) => {
+  const classes = useStyles();
+
+  const handleUpdateCartQty = (lineItemId, quantity) => {
+    onUpdateCartQty(lineItemId, quantity);
+  }
+  
+  const handleRemoveFromCart = (lineItemId) => onRemoveFromCart(lineItemId);
+
+  return (
+    <div className="cart-item">
+      <img className="cart-item__image" src={item.image.url} alt={item.name} />
+      <div className="cart-item__details">
+        <h4 className="cart-item__details-name">{item.name}</h4>
+        <h4 className="cart-item__details-name">{item.quantity}</h4>
+        <h4 className="cart-item__details-name">{item.id}</h4>
+        <h4 className="cart-item__details-name">{lineItemId}</h4>
+        <div className="cart-item__details-qty">
           <button
             type="button"
-            onClick={() => handleUpdateCartQty(line_items.item.id, item.quantity - 1)}
-          >
+            onClick={() => commerce.cart.update(item.id, item.quantity - 1)}
+            >
             -
           </button>
           <p>{item.quantity}</p>
           <button
             type="button"
-            onClick={() => handleUpdateCartQty(line_items.item.id, item.quantity + 1)}
-          >
+            onClick={() => handleUpdateCartQty(item.id, item.quantity + 1)}
+            >
             +
           </button>
         </div>
@@ -35,14 +83,15 @@ const CartItem = ({ item, line_items, lineItemId, onUpdateCartQty, onRemoveFromC
           {item.line_total.formatted_with_symbol}
         </div>
       </div>
-      <button type="button" className="cart-item__remove">
+      <button type="button" className="cart-item__remove" onClick={() => commerce.cart.remove(item.id)}>
         Remove
       </button>
     </div>
   );
+  console.log(item.quantity)
 };
 
-export default CartItem;
+export default CartItem; */
 
 /* import React from 'react';
 import { Typography, Button, Card, CardActions, CardContent, CardMedia } from '@material-ui/core';
